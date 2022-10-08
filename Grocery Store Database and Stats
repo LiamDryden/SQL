@@ -1,0 +1,23 @@
+CREATE TABLE grocerystore (id integer primary key, item text, price integer, quantity integer);
+
+INSERT INTO grocerystore VALUES
+(1, "Bananas", .50, 50),
+(2, "Apples", 1, 60),
+(3, "Oranges", 1, 60),
+(4, "Sodas", 2.99, 25),
+(5, "Cereal", 4.75, 75),
+(6, "Milk", 1.99, 20),
+(7, "Pizza", 7.99, 15),
+(8, "Cheese", 3.50, 10),
+(9, "Crackers", 2.50, 10),
+(10, "Bread", 4.99, 15),
+(11, "Peanut Butter", 3.99, 12),
+(12, "Jelly", 3.99, 14),
+(13, "Eggs", 5.99, 22),
+(14, "Butter", 5, 15),
+(15, "Salad Dressing", 3.50, 16);
+
+
+SELECT * FROM grocerystore;
+SELECT SUM (quantity) FROM grocerystore;
+SELECT * FROM grocerystore WHERE price > 2;
