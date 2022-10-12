@@ -1,0 +1,76 @@
+CREATE TABLE BoxOffice2021 
+    (Rank INTEGER, 
+    Title TEXT, 
+    Studio TEXT,
+    Gross_Worldwide INTEGER,
+    Gross_Domestic INTEGER,
+    Estimated_Budget INTEGER,
+    Max_Theaters INTEGER,
+    Duration INTEGER);
+
+INSERT INTO BoxOffice2021 VALUES
+    (1, "Spider-Man: No Way Home", "Sony Pictures Entertainment", 1906693477, 804793477, 200000000, 4336, 148);
+INSERT INTO BoxOffice2021 VALUES
+    (2, "Shang-Chi and the Legend of the Ten Rings", "Walt Disney", 432243292, 224543292, 150000000, 4300, 132);
+INSERT INTO BoxOffice2021 VALUES
+    (3, "Venom: Let There Be Carnage", "Sony Pictures Entertainment", 506863592, 213550366, 110000000, 4225, 90);
+INSERT INTO BoxOffice2021 VALUES
+    (4, "Black Widow", "Walt Disney", 379751655, 183651655, 200000000, 4275, 134);
+INSERT INTO BoxOffice2021 VALUES
+    (5, "F9: The Fast Saga", "Universal Pictures", 726229501, 173005945, 200000000, 4203, 135);
+INSERT INTO BoxOffice2021 VALUES
+    (6, "Eternals", "Walt Disney", 402064899, 164870234, 200000000, 4090, 157);
+INSERT INTO BoxOffice2021 VALUES
+    (7, "Sing 2", "Universal Pictures", 408897474, 162790990, 85000000, 3892, 110);
+INSERT INTO BoxOffice2021 VALUES
+    (8, "No Time to Die", "MGM", 774229501, 160891007, 250000000, 4407, 163);
+INSERT INTO BoxOffice2021 VALUES
+    (9, "A Quiet Place Part II", "Paramount Pictures", 297372261, 160072261, 61000000, 3744, 97);
+INSERT INTO BoxOffice2021 VALUES
+    (10, "Ghostbusters: Afterlife", "Sony Pictures Entertainment", 204334455, 129360575, 75000000, 4315, 124);
+INSERT INTO BoxOffice2021 VALUES
+    (11, "Free Guy", "20th Century", 331526598, 121626598, 100000000, 4165, 115);
+INSERT INTO BoxOffice2021 VALUES
+    (12, "Jungle Cruise", "Walt Disney", 220889446, 116987516, 200000000, 4310, 127);
+INSERT INTO BoxOffice2021 VALUES
+    (13, "Dune", "Warner Bros", 401847900, 108327830, 165000000, 4125, 155);
+INSERT INTO BoxOffice2021 VALUES
+    (14, "Godzilla vs. Kong", "Warner Bros", 470067014, 100916094, 200000000, 3084, 113);
+INSERT INTO BoxOffice2021 VALUES
+    (15, "Encanto", "Walt Disney", 256786742, 96093622, 150000000, 3980, 109);
+INSERT INTO BoxOffice2021 VALUES
+    (16, "West Side Story", "20th Century", 760116171, 38530322, 100000000, 2820, 156);
+INSERT INTO BoxOffice2021 VALUES
+    (17, "Respect", "MGM", 32882823, 24278399, 55000000, 3207, 145);
+INSERT INTO BoxOffice2021 VALUES
+    (18, "Halloween Kills", "Universal", 131647155, 92002155, 20000000, 3727, 106);
+INSERT INTO BoxOffice2021 VALUES
+    (19, "The Suicide Squad", "Warner Bros", 168657565, 55817425, 185000000, 4019, 132);
+INSERT INTO BoxOffice2021 VALUES
+    (20, "Nobody", "Universal", 57510518, 27568035, 16000000, 2567, 92);
+    
+SELECT * FROM BoxOffice2021;
+
+SELECT Studio, AVG(Gross_Domestic) AS Avg_DomesticSales
+    FROM BoxOffice2021
+    GROUP BY Studio
+    HAVING avg_domesticsales > 150000000;
+    
+SELECT Title, MAX(Gross_Domestic) AS Max_DomesticSales
+    FROM BoxOffice2021
+    GROUP BY Studio;
+    
+SELECT Title, MIN(Gross_Domestic) AS Min_DomesticSales
+    FROM BoxOffice2021
+    GROUP BY Studio;
+
+SELECT COUNT (*),
+    CASE
+        WHEN Gross_Worldwide > Estimated_Budget THEN    "Commercial Success"
+        ELSE "Commercial Failure"
+    END AS "Success/Failure" FROM BoxOffice2021
+    GROUP BY "Success/Failure";
+
+SELECT Title FROM BoxOffice2021
+    WHERE Duration > 150
+    AND Max_Theaters < 4100;
