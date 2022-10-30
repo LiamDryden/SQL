@@ -1,0 +1,72 @@
+CREATE TABLE actors (id INTEGER PRIMARY KEY,
+    name TEXT,
+    age INTEGER);
+    
+INSERT INTO actors (name, age) VALUES ("Robert Downey Jr.", 57);
+INSERT INTO actors (name, age) VALUES ("Tom Cruise", 60);
+INSERT INTO actors (name, age) VALUES ("Viola Davis", 57);
+INSERT INTO actors (name, age) VALUES ("Julia Roberts", 54);
+INSERT INTO actors (name, age) VALUES ("Brad Pitt", 58);
+    
+CREATE TABLE movies (id INTEGER PRIMARY KEY,
+    actor_id INTEGER,
+    title TEXT,
+    release_year INTEGER);
+
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (1, "Sherlock Holmes", 2009);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (1, "Iron Man", 2008);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (1, "Chef", 2014);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (1, "Tropic Thunder", 2008);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (2, "Mission: Impossible", 1996);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (2, "Top Gun: Maverick", 2022);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (2, "Tropic Thunder", 2008);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (2, "Vanilla Sky", 2001);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (3, "The Help", 2011);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (3, "The Suicide Squad", 2021);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (3, "Widows", 2018);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (3, "Fences", 2016);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (4, "Pretty Woman", 1990);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (4, "Erin Brockovich", 2000);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (4, "My Best Friend's Wedding", 1997);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (4, "Closer", 2004);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (5, "Moneyball", 2011);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (5, "Mr. and Mrs. Smith", 2005);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (5, "World War Z", 2013);
+INSERT INTO movies (actor_id, title, release_year) VALUES
+    (5, "Ocean's 11", 2001);
+    
+SELECT * FROM actors;
+SELECT * FROM movies;
+
+SELECT actors.name, movies.title FROM actors
+    JOIN movies
+        ON actors.id = movies.actor_id;
+        
+SELECT actors.name, movies.title FROM actors
+    JOIN movies
+        ON actors.id = movies.actor_id
+    WHERE actors.age > 57;
+    
+SELECT actors.name, movies.title FROM actors
+    JOIN movies
+        ON actors.id = movies.actor_id
+    WHERE movies.title = "Tropic Thunder";
