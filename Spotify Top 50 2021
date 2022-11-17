@@ -1,0 +1,35 @@
+CREATE TABLE BIT_DB.SpotifyData (
+    ID INTEGER PRIMARY KEY,
+    artist_name varchar NOT NULL,
+    track_name varchar NOT NULL,
+    track_id varchar NOT NULL,
+    popularity integer NOT NULL,
+    danceability decimal(4,3) NOT NULL,
+    energy decimal(4,3) NOT NULL,
+    key integer NOT NULL,
+    loudness decimal(5,3) NOT NULL,
+    mode integer NOT NULL,
+    speechiness decimal(5,4) NOT NULL,
+    acousticness decimal(6,5) NOT NULL,
+    instrumentalness text NOT NULL,
+    liveness decimal(5,4) NOT NULL,
+    valence decimal(4,3) NOT NULL,
+    tempo decimal(6,3) NOT NULL,
+    duration_ms integer NOT NULL,
+    time_signature integer NOT NULL);
+    
+SELECT * FROM BIT_DB.SpotifyData;
+
+SELECT artist_name, AVG(danceability) AS avg_dance FROM BIT_DB.SpotifyData
+    GROUP BY artist_name;
+    
+SELECT track_name, MAX(popularity) AS max_pop FROM BIT_DB.SpotifyData
+    GROUP BY artist_name
+    LIMIT 10;  
+      
+SELECT artist_name, track_name, tempo FROM BIT_DB.SpotifyData
+    WHERE tempo < 100
+    ORDER BY tempo ASC;
+    
+SELECT track_name, tempo FROM BIT_DB.SpotifyData
+    WHERE duration_ms > 190000 and danceability > 0.800;
