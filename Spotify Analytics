@@ -1,3 +1,7 @@
+# For this project, I downloaded Spotify data from Kaggle.
+# Then I created a table to insert Spotify data into and performed analysis on the data.
+
+#Creating the table: 
 CREATE TABLE BIT_DB.SpotifyData (
     ID INTEGER PRIMARY KEY,
     artist_name varchar NOT NULL,
@@ -17,19 +21,26 @@ CREATE TABLE BIT_DB.SpotifyData (
     tempo decimal(6,3) NOT NULL,
     duration_ms integer NOT NULL,
     time_signature integer NOT NULL);
-    
+
+#Then, I inserted the data into the table from the spotify_top50_data.csv file.
+
+#First, I wanted to see what the table itself looked like with all the data inserted.
 SELECT * FROM BIT_DB.SpotifyData;
 
+#Then, I determined the average danceability of each of the artists in the table.
 SELECT artist_name, AVG(danceability) AS avg_dance FROM BIT_DB.SpotifyData
     GROUP BY artist_name;
-    
+
+#And discovered which tracks had the highest popularity by artists, limiting the list by 10.
 SELECT track_name, MAX(popularity) AS max_pop FROM BIT_DB.SpotifyData
     GROUP BY artist_name
     LIMIT 10;  
-      
+
+#Created a list of artists with tracks that have a tempo slower than 100 bpm.
 SELECT artist_name, track_name, tempo FROM BIT_DB.SpotifyData
     WHERE tempo < 100
     ORDER BY tempo ASC;
-    
+
+#And finally, used a function to determine which tracks have a duration of more than 190000 ms and a danceability of more than 0.800.
 SELECT track_name, tempo FROM BIT_DB.SpotifyData
     WHERE duration_ms > 190000 and danceability > 0.800;
