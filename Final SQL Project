@@ -1,0 +1,41 @@
+SELECT FirstName, LastName, SupportRepId FROM chinook.customers
+    WHERE Email LIKE '%@gmail.com';
+
+SELECT FirstName, LastName, Title FROM chinook.employees
+    WHERE Title LIKE '%Agent%';
+    
+SELECT count(InvoiceID) FROM chinook.invoices
+    WHERE InvoiceDate LIKE '2013%';
+    
+SELECT distinct BillingCountry FROM chinook.invoices;
+
+SELECT cust.FirstName, cust.LastName, inv.InvoiceDate FROM chinook.customers cust
+    LEFT JOIN chinook.invoices inv
+        ON cust.CustomerId = inv.CustomerId
+    WHERE inv.InvoiceDate BETWEEN '2010-01-01' AND '2010-12-31'
+    ORDER BY InvoiceDate;
+    
+SELECT cust.LastName, SUM(item.Quantity) * item.UnitPrice AS TotalSpent, SUM(item.Quantity) AS TotalItems FROM chinook.customers cust
+    JOIN chinook.invoices inv
+        ON cust.CustomerId = inv.CustomerId
+    JOIN chinook.invoice_items item
+        ON item.InvoiceId = inv.InvoiceId
+    GROUP BY cust.LastName;
+    
+SELECT track.Name, track.Composer FROM chinook.tracks track
+    JOIN chinook.genres g
+        ON track.GenreId = g.GenreId
+    WHERE g.Name = 'Jazz';
+
+SELECT emp.LastName, emp.Firstname, inv.InvoiceId FROM chinook.Employees emp 
+    JOIN chinook.Customers cust
+        ON cust.SupportRepId = emp.EmployeeId
+    JOIN chinook.Invoices Inv
+        ON Inv.CustomerId = cust.CustomerId;
+        
+SELECT album.Title AS AlbumTitle, artist.Name AS ArtistName, track.Name AS TrackName FROM chinook.albums album   
+    JOIN chinook.artists artist
+        ON album.ArtistId = artist.ArtistId
+    JOIN chinook.tracks track
+        ON album.AlbumId = track.AlbumId
+    WHERE ArtistName IN ('Deep Purple');
