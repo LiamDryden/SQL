@@ -1,41 +1,56 @@
+#Imported a database entitled "chinook.db", and used it to analyse the data and connections between the tables within.
+
+#1. Finding the customers who used a gmail account to contact customer support, and what customer support id was connected to their message.
 SELECT FirstName, LastName, SupportRepId FROM chinook.customers
     WHERE Email LIKE '%@gmail.com';
 
+#2. Showing the customers only from Germany.
+SELECT * FROM chinook.customers 
+    WHERE Country = "Germany" ;
+
+#3. Determining which employees have the title of Sales Agent.
 SELECT FirstName, LastName, Title FROM chinook.employees
     WHERE Title LIKE '%Agent%';
-    
+
+#4. Counting the amount of invoices that were collected in the year 2013.
 SELECT count(InvoiceID) FROM chinook.invoices
     WHERE InvoiceDate LIKE '2013%';
-    
+
+#5. A distinct list of billing countries from the invoice table.
 SELECT distinct BillingCountry FROM chinook.invoices;
 
+#6. Listing the name of each customer and invoice order date connected to each customer's order from the year 2010.
 SELECT cust.FirstName, cust.LastName, inv.InvoiceDate FROM chinook.customers cust
     LEFT JOIN chinook.invoices inv
         ON cust.CustomerId = inv.CustomerId
     WHERE inv.InvoiceDate BETWEEN '2010-01-01' AND '2010-12-31'
     ORDER BY InvoiceDate;
-    
+
+#7. Creating a list of customers with their corresponding amount of money spent and items bought.
 SELECT cust.LastName, SUM(item.Quantity) * item.UnitPrice AS TotalSpent, SUM(item.Quantity) AS TotalItems FROM chinook.customers cust
     JOIN chinook.invoices inv
         ON cust.CustomerId = inv.CustomerId
     JOIN chinook.invoice_items item
         ON item.InvoiceId = inv.InvoiceId
     GROUP BY cust.LastName;
-    
+
+#8. Creating a list of track name and composer, under the genre of jazz.
 SELECT track.Name, track.Composer FROM chinook.tracks track
     JOIN chinook.genres g
         ON track.GenreId = g.GenreId
     WHERE g.Name = 'Jazz';
-
+    
+#9. A table showing the invoices that correspond with each sales agent.
 SELECT emp.LastName, emp.Firstname, inv.InvoiceId FROM chinook.Employees emp 
     JOIN chinook.Customers cust
         ON cust.SupportRepId = emp.EmployeeId
     JOIN chinook.Invoices Inv
         ON Inv.CustomerId = cust.CustomerId;
-        
+
+#10. Finding the albums and track names made by the same artist: Deep Purple.
 SELECT album.Title AS AlbumTitle, artist.Name AS ArtistName, track.Name AS TrackName FROM chinook.albums album   
     JOIN chinook.artists artist
         ON album.ArtistId = artist.ArtistId
     JOIN chinook.tracks track
         ON album.AlbumId = track.AlbumId
-    WHERE ArtistName IN ('Deep Purple');
+    WHERE ArtistName IN ('Deep Purple'); 
